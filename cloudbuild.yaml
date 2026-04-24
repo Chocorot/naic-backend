@@ -1,0 +1,30 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/naic-backend:$COMMIT_SHA', '.']
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/naic-backend:$COMMIT_SHA']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'naic-backend'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/naic-backend:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1' # Change to your preferred region
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '2Gi' # Large models might need more memory
+      - '--cpu'
+      - '2'
+
+images:
+  - 'gcr.io/$PROJECT_ID/naic-backend:$COMMIT_SHA'

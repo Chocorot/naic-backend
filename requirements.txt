@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+gunicorn
+torch
+torchvision
+pillow
+python-multipart
+pydantic
+pydantic-settings
+python-dotenv
+requests
