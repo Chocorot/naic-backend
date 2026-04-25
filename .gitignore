@@ -10,6 +10,7 @@ __pycache__/
 .pytest_cache/
 
 # ML Weights
+*.pth
 weights/*.pth
 weights/*.pt
 weights/*.h5
