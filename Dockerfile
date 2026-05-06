@@ -27,4 +27,5 @@ EXPOSE 8080
 
 # Command to run the application using Gunicorn for production performance
 # We use 1 worker to ensure enough memory for the 5-fold ensemble
-CMD ["gunicorn", "-w", "1", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8080", "--timeout", "120"]
+# Timeout increased to 300 to allow time for loading 10 models (5 ConvNeXt + 5 EfficientNet) into memory
+CMD ["gunicorn", "-w", "1", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8080", "--timeout", "300"]

@@ -3,9 +3,12 @@ uvicorn[standard]
 gunicorn
 torch
 torchvision
+transformers>=4.40
 pillow
 python-multipart
 pydantic
 pydantic-settings
 python-dotenv
 requests
+opencv-python-headless>=4.8
+numpy>=1.24
