@@ -18,6 +18,7 @@ async def predict(file: UploadFile = File(...)):
 
     Response format:
         {
+            "prediction": int,                # 0-4 (backward compatibility)
             "predicted_class": int,           # 0-4
             "predicted_label": str,           # human-readable class name
             "probabilities": list[float],     # length 5, sums to 1.0
@@ -53,6 +54,7 @@ async def predict(file: UploadFile = File(...)):
         confidence = float(probs[predicted_class])
 
         return PredictionResult(
+            prediction=predicted_class,
             predicted_class=predicted_class,
             predicted_label=settings.CLASS_NAMES[predicted_class],
             probabilities=probs,

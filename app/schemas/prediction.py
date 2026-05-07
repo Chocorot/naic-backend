@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import List
 
 class PredictionResult(BaseModel):
+    prediction: int                    # Backward compatibility for frontend
     predicted_class: int               # 0-4
     predicted_label: str               # human-readable class name
     probabilities: List[float]         # length 5, sums to 1.0
